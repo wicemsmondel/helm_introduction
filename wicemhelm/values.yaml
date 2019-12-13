@@ -5,6 +5,14 @@ service:
   type: LoadBalancer
   port: 80
 
+resources:
+  limits:
+    cpu: "700m"
+    memory: "200Mi"
+  requests:
+    cpu: "100m"
+    memory: "123Mi"
+
 front:
   labels:
     role: toto

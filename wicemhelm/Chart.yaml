@@ -1,7 +1,7 @@
 apiVersion: v2
-name: fronthelm
+name: wicemchart
 description: A Helm chart for Axel front-end
 
-version: 0.3.6
+version: 0.4.0
 
 appVersion: 1.16.0

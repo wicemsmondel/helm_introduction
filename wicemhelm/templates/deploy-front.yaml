@@ -19,6 +19,13 @@ spec:
       containers:
       - name: pod-front
         image: {{ .Values.front.image.urlecr }}/{{ .Values.front.image.repo }}:{{ .Values.front.image.tag }}
+        resources:
+          limits:
+            cpu: {{ .Values.resources.limits.cpu }}
+            memory: {{ .Values.resources.limits.memory }}
+          requests: 
+            cpu: {{ .Values.resources.requests.cpu }}
+            memory: {{ .Values.resources.requests.memory }}
         ports:
         - containerPort: 80
           name: web

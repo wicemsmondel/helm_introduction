@@ -1,0 +1,36 @@
+specdeploy:
+  replicas: 1
+
+service:
+  type: LoadBalancer
+  port: 80
+
+front:
+  labels:
+    role: toto
+    else:
+      key: tata
+      value: patate
+  image:
+    repo: john-axel-front
+    urlecr: 435606335423.dkr.ecr.eu-west-1.amazonaws.com
+    tag: john
+
+back:
+  labels:
+    role: foo
+    else:
+      key: bar
+      value: potatoe
+  image:
+    repo: john-axel-apy
+    urlecr: 435606335423.dkr.ecr.eu-west-1.amazonaws.com
+    tag: 1.0.29
+
+secrets:
+  data:
+    user: bXl1c2VyCg==
+    password: bXlwYXNzCg==
+    uri: cG9zdGdyZXNxbC5wb3N0Z3Jlcy5zdmMuY2x1c3Rlci5sb2NhbAo=
+    port: NTQzMgo=
+    database: am9obi1kYgo=

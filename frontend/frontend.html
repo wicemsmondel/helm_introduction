@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Ajax - La fonction ajax()</title>
+      
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+  </head>
+
+    
+
+  <body>
+
+
+    <table id="records_table" border='1'>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Owner</th>
+            <th>User</th>
+            <th>Password</th>
+            <th>Namespace</th>
+            <th>DELETE</th>
+        </tr>
+    </table>
+
+    <!-- POST -->
+    <div id="divPost">
+        <form id="formPost">
+            <input type="text" name="postText" placeholder='{"ID":13,"Nom":"Bob","Owner":"God","User":"bb","Password":"123","Namespace":"white"}' size="50">
+        </form>
+    </div>
+    <button id="post">Post it</button><br />
+    <!-- scripts -->
+    
+    <script src="jquery.js"></script>
+    <script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+      
+      
+    <script>
+    // POST
+    $(function() {
+        $('#post').click(function() {
+
+          var text = $('#divPost').find('input[name="postText"]').val();
+
+           $.ajax({
+            type: 'POST',
+            url: 'http://<URL Du Load Balancer de votre API >/data',
+            data: text,
+            dataType: 'json',
+            contentType: 'application/json',
+            timeout: 3000,
+            success: function(data) {
+              alert(data); },
+          });
+          window.location.reload(true);
+        });
+    });
+    </script>
+      
+    <script>
+    function productDelete(ctl){
+        console.log($(ctl).attr('iddb'))
+        var id = $(ctl).attr('iddb')
+        var durl = "http://<URL Du Load Balancer de votre API >/data/" + id
+        console.log(durl)
+        $.ajax({
+            type: 'DELETE',
+            url: durl,
+        });
+        $(ctl).parents("tr").remove();
+    };
+    </script>
+    
+    <script>
+    // GET
+      $(function() {
+        $.ajax({
+          type: 'GET',
+          url: 'http://<URL Du Load Balancer de votre API >/data',
+          timeout: 3000,
+          success: function(data) {
+            //console.log(data);
+            response = $.parseJSON(data);
+            //$('#records_table').empty()
+            //console.log(response);
+            $.each(response, function(i, item) {
+              var ind = i;
+              //"<input type='hidden' id='sql) '>")
+              //console.log(hidden)
+              var $tr = $("<tr>").append(
+                  $("<td>").text(item.ID),
+                  $('<td>').text(item.Name),
+                  $('<td>').text(item.Owner),
+                  $('<td>').text(item.User),
+                  $('<td>').text(item.Password),
+                  $('<td>').text(item.Namespace),
+                  "<td>" + "<button  id='deleterow'  iddb=" + item.ID + " type='button' " + "onclick='productDelete(this);' " + "class='btn btn-default'>delete</button>"
+              ).appendTo('#records_table');
+              //console.log($tr.wrap('<p>').html());
+              console.log(ind);
+              console.log(i);
+            });
+          },
+          error: function() {
+              alert('La requête n\'a pas abouti'); }
+        });
+      });
+    </script>
+
+  </body>
+</html>

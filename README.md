@@ -1,4 +1,6 @@
-## Building a frontend-backend to learn kubenetes
+# Introduction to Helm
+## Refactoring all Kubernetes .yaml with Helm
+## Frontend & backend forked from John Armitage repo https://github.com/johnjarmitage/frontEtBackPgProv-Simplon
 
 * Frontend: a html page with javascript using jQuery.js
 * Backend: a python script using sqlalchemy and flask
@@ -36,5 +38,4 @@ kubectl -n johnaxel-apy-ns apply -f APY1/networkPolicyBack_Loick.yaml
 ```
 
 Navigate to the external load balancer and see if it works...
-# helm_introduction
-# helm_introduction
+

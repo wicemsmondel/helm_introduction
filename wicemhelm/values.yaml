@@ -1,6 +1,12 @@
 specdeploy:
   replicas: 1
 
+spechpa:
+  max: 3
+  min: 1
+  scale:
+  targetCPU: 5
+
 service:
   type: LoadBalancer
   port: 80
